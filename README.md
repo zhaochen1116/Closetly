@@ -59,9 +59,9 @@ It integrates real-time weather-based recommendations, smart image handling, and
 |:---:|:---:|:---:|:---:|:---:|
 | ![Splash](<mobile-client/assets/20250426223542.png>) | ![Home](<mobile-client/assets/20250426223607.png>) | ![Closet](<mobile-client/assets/20250426223526.png>) | ![Model](<mobile-client/assets/20250426223203.png>) | ![Try-On](<mobile-client/assets/20250426223526.png>) |
 
-| Clothes upload | Clothes edit | Model upload |Model edit | AI Try-On |
+<!-- | Clothes upload | Clothes edit | Model upload |Model edit | AI Try-On |
 |:---:|:---:|:---:|:---:|:---:|
-| ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png)
+| ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) -->
 
 
 ---
