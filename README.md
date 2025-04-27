@@ -51,8 +51,8 @@ It integrates real-time weather-based recommendations, smart image handling, and
 ## 🖼️ Demo Screenshots
 
 | Splash Screen | Home Weather Recommendation | Closet View | Model Gallery | AI Try-On |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| ![alt text](<mobile-client/assets/20250426222739.png>)| ![alt text](<mobile-client/assets/20250426222839.png>) | ![alt text](<mobile-client/assets/20250426222848.png>) | ![alt text](<mobile-client/assets/20250426223607.png>) | ![alt text](<mobile-client/assets/20250426223542.png>) |
+|:---:|:---:|:---:|:---:|:---:|
+| ![](mobile-client/assets/20250426222739.png) | ![](mobile-client/assets/20250426222839.png) | ![](mobile-client/assets/20250426222848.png) | ![](mobile-client/assets/20250426223607.png) | ![](mobile-client/assets/20250426223542.png) |
 
 
 ---
