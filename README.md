@@ -52,10 +52,10 @@ It integrates real-time weather-based recommendations, smart image handling, and
 
 | Splash Screen | Home Weather Recommendation | Closet View | Model Gallery | AI Try-On |
 |:---:|:---:|:---:|:---:|:---:|
-| ![alt text](<../assets/20250426222739-1.png>)| ![alt text](<../assets/20250426222839-1.png>) | ![alt text](<../assets/20250426222848-1.png>) | ![alt text](<../assets/20250426223607-1.png>) | ![alt text](<../assets/20250426223542-1.png>) |
+| ![alt text](<../assets/20250426222739.png>)| ![alt text](<../assets/20250426222839.png>) | ![alt text](<../assets/20250426222848.png>) | ![alt text](<../assets/20250426223607.png>) | ![alt text](<../assets/20250426223542.png>) |
 
- ![alt text](<20250426223542-1.png>) ![alt text](<20250426223526-1.png>) ![alt text](<20250426223203-1.png>) ![alt text](<20250426223139-1.png>) ![alt text](<20250426222906-1.png>)
-![alt text](<20250426223632-1.png>)
+ ![alt text](<20250426223542.png>) ![alt text](<20250426223526.png>) ![alt text](<20250426223203.png>) ![alt text](<20250426223139.png>) ![alt text](<20250426222906.png>)
+![alt text](<20250426223632.png>)
 
 ---
 
