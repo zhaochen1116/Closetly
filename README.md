@@ -54,16 +54,14 @@ It integrates real-time weather-based recommendations, smart image handling, and
 |:---:|:---:|:---:|:---:|:---:|
 | ![](mobile-client/assets/20250426222739.png) | ![](mobile-client/assets/20250426222839.png) | ![](mobile-client/assets/20250426222848.png) | ![](<mobile-client/assets/20250426222906.png>) | ![](<mobile-client/assets/20250426223632.png>) |
 
-| Clothes upload | Clothes edit | Model upload |Model edit | AI Try-On |
-|:---:|:---:|:---:|:---:|:---:|
-| ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png)
-
 
 | AI Try-On-1 | AI Try-On-2 | AI Try-On-3 | Try-on history | Try-on history |
 |:---:|:---:|:---:|:---:|:---:|
 | ![Splash](<mobile-client/assets/20250426223542.png>) | ![Home](<mobile-client/assets/20250426223607.png>) | ![Closet](<mobile-client/assets/20250426223526.png>) | ![Model](<mobile-client/assets/20250426223203.png>) | ![Try-On](<mobile-client/assets/20250426223526.png>) |
 
-
+| Clothes upload | Clothes edit | Model upload |Model edit | AI Try-On |
+|:---:|:---:|:---:|:---:|:---:|
+| ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png) | ![Final](mobile-client/assets/20250426223542.png)
 
 
 ---
