@@ -50,22 +50,20 @@ It integrates real-time weather-based recommendations, smart image handling, and
 
 ## 🖼️ Demo Screenshots
 
-| Splash Screen | Home Weather Recommendation | Closet View | Clothes View | AI Try-On |
+| Splash Screen | Home Weather Recommendation | Closet View | Clothes View | Model View |
 |:---:|:---:|:---:|:---:|:---:|
-| ![](mobile-client/assets/20250426222739.png) | ![](mobile-client/assets/20250426222839.png) | ![](mobile-client/assets/20250426222848.png) | ![](mobile-client/assets/20250426223607.png) | ![](mobile-client/assets/20250426223542.png) |
+| ![](mobile-client/assets/20250426222739.png) | ![](mobile-client/assets/20250426222839.png) | ![](mobile-client/assets/20250426222848.png) | ![](<mobile-client/assets/20250426222906.png>) | ![](mobile-client/assets/20250426223542.png) |
+
+| Clothes upload | Clothes edit | Model upload |Model edit | AI Try-On |
+|:---:|:---:|:---:|:---:|:---:|
+| ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>)
 
 
-| Splash Screen | Home Weather Recommendation | Closet View | Model Gallery | AI Try-On |
+| AI Try-On-1 | AI Try-On-2 | AI Try-On-3 | Try-on history | Try-on history |
 |:---:|:---:|:---:|:---:|:---:|
 | ![Splash](<mobile-client/assets/20250426223632.png>) | ![Home](<mobile-client/assets/20250426222739.png>) | ![Closet](<mobile-client/assets/20250426222839.png>) | ![Model](<mobile-client/assets/20250426222848.png>) | ![Try-On](<mobile-client/assets/20250426222906.png>) |
 
-| Upload Model | Try-On Loading | Closet Category | Model Upload | Try-On Result |
-|:---:|:---:|:---:|:---:|:---:|
-| ![Upload](<mobile-client/assets/20250426223139.png>) | ![Loading](<mobile-client/assets/20250426223149.png>) | ![Category](<mobile-client/assets/20250426223203.png>) | ![Model Upload](<mobile-client/assets/20250426223512.png>) | ![Result](<mobile-client/assets/20250426223526.png>) |
 
-| Final Try-On | Home Weather Recommendation | Closet View | Clothes View | AI Try-On |
-|:---:|:---:|:---:|:---:|:---:|
-| ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>)
 
 
 ---
