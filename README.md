@@ -63,9 +63,9 @@ It integrates real-time weather-based recommendations, smart image handling, and
 |:---:|:---:|:---:|:---:|:---:|
 | ![Upload](<mobile-client/assets/20250426223139.png>) | ![Loading](<mobile-client/assets/20250426223149.png>) | ![Category](<mobile-client/assets/20250426223203.png>) | ![Model Upload](<mobile-client/assets/20250426223512.png>) | ![Result](<mobile-client/assets/20250426223526.png>) |
 
-| Final Try-On |
-|:---:|
-| ![Final](<mobile-client/assets/20250426223542.png>) |
+| Final Try-On | Home Weather Recommendation | Closet View | Clothes View | AI Try-On |
+|:---:|:---:|:---:|:---:|:---:|
+| ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>) | ![Final](<mobile-client/assets/20250426223542.png>)
 
 
 ---
