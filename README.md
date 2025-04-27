@@ -52,9 +52,9 @@ It integrates real-time weather-based recommendations, smart image handling, and
 
 | Splash Screen | Home Weather Recommendation | Closet View | Model Gallery | AI Try-On |
 |:---:|:---:|:---:|:---:|:---:|
-| ![alt text](<mobile-client/assets/20250426222739.png>)| ![alt text](<../assets/20250426222839.png>) | ![alt text](<../assets/20250426222848.png>) | ![alt text](<../assets/20250426223607.png>) | ![alt text](<../assets/20250426223542.png>) |
+| ![alt text](<mobile-client/assets/20250426222739.png>)| ![alt text](<mobile-client/assets/20250426222839.png>) | ![alt text](<mobile-client/assets/20250426222848.png>) | ![alt text](<mobile-client/assets/20250426223607.png>) | ![alt text](<mobile-client/assets/20250426223542.png>) |
 
-![alt text](20250426223632.png) ![alt text](20250426222739.png) ![alt text](20250426222839.png) ![alt text](20250426222848.png) ![alt text](20250426222906.png) ![alt text](20250426223139.png) ![alt text](20250426223149.png) ![alt text](20250426223203.png) ![alt text](20250426223512.png) ![alt text](20250426223526.png) ![alt text](20250426223542.png) ![alt text](20250426223607.png) ![alt text](20250426223623.png)
+![alt text](<mobile-client/assets20250426223632.png) ![alt text](<mobile-client/assets20250426222739.png) ![alt text](<mobile-client/assets20250426222839.png) ![alt text](<mobile-client/assets20250426222848.png) ![alt text](<mobile-client/assets20250426222906.png) ![alt text](<mobile-client/assets20250426223139.png) ![alt text](<mobile-client/assets20250426223149.png) ![alt text](<mobile-client/assets20250426223203.png) ![alt text](<mobile-client/assets20250426223512.png) ![alt text](<mobile-client/assets20250426223526.png) ![alt text](<mobile-client/assets20250426223542.png) ![alt text](<mobile-client/assets20250426223607.png) ![alt text](<mobile-client/assets20250426223623.png)
 
 ---
 
