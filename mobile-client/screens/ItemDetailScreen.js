@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import { deleteItem } from '../services/api'; 
+import { BASE_URL } from '@env';
 
 export default function ItemDetailScreen({ route }) {
   const { item } = route.params;
@@ -14,7 +14,7 @@ export default function ItemDetailScreen({ route }) {
       {
         text: 'Delete', style: 'destructive', onPress: async () => {
           try {
-            await axios.delete(`http://192.168.40.9:9000/api/items/${item._id}`);
+            await axios.delete(`${BASE_URL}/api/items/${item._id}`);
             Alert.alert('✅ Deleted successfully');
             navigation.goBack();
           } catch (error) {
@@ -31,6 +31,7 @@ export default function ItemDetailScreen({ route }) {
   };
 
   return (
+    <SafeAreaView style={styles.container}>
     <View style={styles.container}>
       <Text style={styles.title}>{item.name}</Text>
       <Image source={{ uri: item.imageUrl }} style={styles.image} />
@@ -48,6 +49,7 @@ export default function ItemDetailScreen({ route }) {
         </TouchableOpacity>
       </View>
     </View>
+    </SafeAreaView>
   );
 }
 

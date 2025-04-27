@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react-native';
-import { View, Text, Image, TouchableOpacity, StyleSheet, TextInput, ActivityIndicator, Alert } from 'react-native';
+import { SafeAreaView, View, Text, Image, TouchableOpacity, StyleSheet, TextInput, ActivityIndicator, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import * as FileSystem from 'expo-file-system';
 import { uploadItem } from '../services/api';
 import { uploadToCloudinary } from '../services/uploadToCloudinary';
-import { Picker } from '@react-native-picker/picker'; // 确保安装了 @react-native-picker/picker
+import { Picker } from '@react-native-picker/picker';
 
 export default function UploadScreen({ navigation }) {
   const [imageUri, setImageUri] = useState(null);
@@ -18,8 +16,8 @@ export default function UploadScreen({ navigation }) {
   const pickImage = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,  // ✅ 使用 MediaTypeOptions
-        base64: true, // 获取 base64
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,  //  MediaTypeOptions
+        base64: true, //get base64
         quality: 1,
       });
   
@@ -43,17 +41,17 @@ export default function UploadScreen({ navigation }) {
     setLoading(true);
 
     try {
-      // ✅ 第一步：上传 Cloudinary 获取 URL
+      // ✅step 1: upload to Cloudinary
       const imageUrl = await uploadToCloudinary(imageBase64);
 
-      // ✅ 第二步：提交到后端
+      // ✅ step 2: upload to your server
       const response = await uploadItem({
         name,
         imageBase64,
         imageUrl,
         type,
       });
-      const uploadedType = response?.type || 'unknown'; // 如果需要显示类型的话
+      const uploadedType = response?.type || 'unknown';
 
       Alert.alert(`✅ Upload successful!`, `Category: ${uploadedType}`);
       setImageUri(null);
@@ -70,6 +68,7 @@ export default function UploadScreen({ navigation }) {
   };
 
   return (
+    <SafeAreaView style={styles.container}>
     <View style={styles.container}>
       <Text style={styles.title}>Upload New Item</Text>
 
@@ -108,12 +107,15 @@ export default function UploadScreen({ navigation }) {
         {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Upload</Text>}
       </TouchableOpacity>
     </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  text: { fontSize: 18, color: '#333' },
   container: { flex: 1, padding: 20, paddingTop: 40, backgroundColor: '#fff' },
   title: { fontSize: 22, fontWeight: '600', marginBottom: 20 },
+  previewImage: { width: '100%', height: 300, borderRadius: 12, marginBottom: 20 },
   imageBox: { backgroundColor: '#eee', height: 200, justifyContent: 'center', alignItems: 'center', marginBottom: 20, borderRadius: 10 },
   imageText: { color: '#888' },
   image: { width: '100%', height: '100%', borderRadius: 10 },

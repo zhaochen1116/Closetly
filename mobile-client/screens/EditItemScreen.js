@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-
-const BASE_URL = "http://192.168.40.9:9000"; // backend URL
+import { BASE_URL } from '@env';
 
 export default function EditItemScreen({ route }) {
   const { item } = route.params;

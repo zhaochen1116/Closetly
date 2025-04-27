@@ -1,110 +1,164 @@
 
-# 👗 Closetly: AI-Powered Virtual Try-On & Wardrobe Manager
+# 👚 Closetly - Smart AI Closet App
 
-**Closetly** is an AI-driven virtual closet and outfit try-on app built with React Native, FastAPI, and MongoDB. Users can upload clothing and model photos, generate virtual try-on images using AI (via Replicate), and manage their wardrobe visually.
-
----
-
-## 🧠 Core Features
-
-- 👕 Upload clothing with base64 image + auto-categorization
-- 🧍 Upload model photos (with gender and style tags)
-- 🤖 AI Virtual Try-On (powered by Replicate's Kolors model)
-- ☁️ Cloudinary image hosting for smooth mobile performance
-- 🛢 MongoDB database for items and models
-- 🔐 JWT-based registration and login system (no frontend UI yet)
+Closetly is a full-stack mobile app to manage your clothes, upload model photos, and virtually try on outfits.  
+It integrates real-time weather-based recommendations, smart image handling, and AI-powered try-on using KLING API.
 
 ---
 
-## 💡 Tech Stack
+## 🛠️ Technologies Used
 
-| Tech            | Purpose                      |
-|-----------------|------------------------------|
-| React Native    | Frontend mobile interface    |
-| FastAPI         | Backend API server           |
-| MongoDB         | Database for items/models    |
-| Cloudinary      | Hosting images (items/models)|
-| Kling           | AI try-on generation         |
-| python-jose     | JWT token generation         |
+- **Frontend:** React Native (Expo)
+- **Backend:** FastAPI (Python)
+- **Database:** MongoDB (Atlas Cloud)
+- **Cloud Storage:** Cloudinary
+- **External APIs:**
+  - IP Geolocation (`ipapi.co`)
+  - OpenWeatherMap (Real-time Weather)
+  - KLING Virtual Try-On API
+- **Libraries:**
+  - Axios
+  - React Navigation
+  - Animated API (Splash screen transitions)
 
 ---
 
-## 🚀 Getting Started
+## ✨ Core Features
 
-### Backend Setup
+- **Smart Closet Management**  
+  Upload, view, edit, and delete clothing items, organized by category (top, bottom, outerwear).
+
+- **Model Gallery**  
+  Upload human model photos for virtual try-on. Manage models easily with selection and batch delete.
+
+- **AI Virtual Try-On**  
+  Choose a model and a clothing item → Seamlessly generate AI try-on results powered by KLING.
+
+- **Weather-Based Outfit Recommendations**  
+  Automatically suggest suitable tops and bottoms based on real-time temperature and weather conditions.
+
+- **Real-Time Cloud Storage**  
+  All clothing images and try-on results are stored in Cloudinary and optimized for mobile display.
+
+- **Batch Actions**  
+  Select multiple items to delete or move to another category with a single tap.
+
+- **Dynamic Splash Screen**  
+  Animated logo fade-in/fade-out before entering main content.
+
+---
+
+## 🖼️ Demo Screenshots
+
+| Splash Screen | Home Weather Recommendation | Closet View | Model Gallery | AI Try-On |
+|:---:|:---:|:---:|:---:|:---:|
+| ![alt text](<../assets/20250426222739-1.png>)| ![alt text](<../assets/20250426222839-1.png>) | ![alt text](<../assets/20250426222848-1.png>) | ![alt text](<../assets/20250426223607-1.png>) | ![alt text](<../assets/20250426223542-1.png>) |
+
+ ![alt text](<20250426223542-1.png>) ![alt text](<20250426223526-1.png>) ![alt text](<20250426223203-1.png>) ![alt text](<20250426223139-1.png>) ![alt text](<20250426222906-1.png>)
+![alt text](<20250426223632-1.png>)
+
+---
+
+## 📂 Project Structure
+
+```
+/screens
+  ├── HomeScreen.js
+  ├── ClosetScreen.js
+  ├── ModelScreen.js
+  ├── TryOnScreen.js
+  ├── UploadScreen.js
+  ├── UploadModelScreen.js
+  ├── ClosetCategoryScreen.js
+  ├── AccountScreen.js
+
+/services
+  ├── api.js
+
+/utils
+  ├── database.py
+  ├── kling_client.py
+
+/assets
+  ├── closetly_logo.png
+  ├── sunny.gif
+  ├── rain.gif
+  ├── snow.gif
+  ├── clouds.gif
+
+/backend
+  ├── main.py
+  ├── routes/
+       ├── items.py
+       ├── models.py
+       ├── tryon.py
+```
+
+---
+
+## 🚀 Deployment Setup
 
 1. Install dependencies:
 
 ```bash
+npm install
+cd backend
 pip install -r requirements.txt
 ```
 
-2. Create a `.env` file with the following:
-
-```env
-MONGO_URL=mongodb://localhost:27017
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-REPLICATE_API_TOKEN=your_replicate_token
-JWT_SECRET=your_jwt_secret
-```
-
-3. Run the FastAPI backend:
+2. Create `.env` file:
 
 ```bash
-uvicorn main:app --reload
+# Mobile app
+BASE_URL=http://your-backend-ip:9000
+
+# Backend
+MONGO_URL=your_mongodb_url
+CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_secret
+KLING_API_TOKEN=your_kling_api_token
+WEATHER_API_KEY=your_openweather_api_key
 ```
 
-> Default URL: `http://localhost:8000`
+3. Start backend:
 
----
-
-### Frontend Structure (React Native)
-
-| File                  | Description                         |
-|-----------------------|-------------------------------------|
-| `/screens/TryOnScreen.js` | Model + clothing picker + try-on button |
-| `/screens/MyCloset.js`    | Displays uploaded clothing items     |
-| `/screens/ModelGallery.js`| Displays uploaded model photos      |
-| `/services/api.js`        | API request wrapper (Axios)         |
-
----
-
-## 🖼 Screenshots
-
-### Uploading a Clothing Item
-![Upload Clothing](assets/upload-item.png)
-
-### Uploading a Model Photo
-![Upload Model](assets/upload-model.png)
-
-### AI-Generated Try-On Preview
-![Virtual Try-On](assets/virtual-tryon.png)
-
----
-
-## 🔜 TODO / Roadmap
-
-- ✅ Backend JWT registration & login
-- ⏳ Google Login (planned)
-- ⏳ KlingAI try-on model integration (pending)
-- ⏳ Personal closet features
-- ⏳ Try-on history and outfit archives
-- ⏳ Outfit suggestions and style matching
-
----
-
-## 📁 Project Structure (Backend)
-
+```bash
+cd backend
+uvicorn main:app --reload --host 0.0.0.0 --port 9000
 ```
-backend/
-├── main.py                 # FastAPI backend entry
-├── .env                    # Environment variables
-├── ai_modules/
-│   └── classifier.py       # Clothing type classifier
-├── requirements.txt        # Python dependencies
+
+4. Start Expo App:
+
+```bash
+npm start
 ```
+
+---
+
+## 📄 API Overview
+
+| Method | Endpoint | Description |
+|:---|:---|:---|
+| `GET` | `/api/models` | Get all uploaded models |
+| `POST` | `/api/models` | Upload a new model (base64 image) |
+| `DELETE` | `/api/models/{id}` | Delete a model by ID |
+| `GET` | `/api/items` | Get all clothing items |
+| `POST` | `/api/items` | Upload a clothing item |
+| `PUT` | `/api/items/{id}` | Update clothing item (e.g., move to another folder) |
+| `DELETE` | `/api/items/{id}` | Delete clothing item |
+| `POST` | `/api/tryon` | Start a try-on task |
+| `GET` | `/api/tryon/status/{task_id}` | Check try-on task status |
+
+---
+
+## 📌 Future Plans
+
+- [ ] Outfit auto-matching (e.g., recommend complete sets of tops + bottoms)
+- [ ] Personal style tagging (casual, formal, sporty, etc.)
+- [ ] User profile and authentication
+- [ ] Full KLING-based outfit generation pipeline
+- [ ] Share try-on results on social media
 
 ---
 
@@ -116,4 +170,11 @@ backend/
 
 ---
 
-> If you like this project, give it a ⭐ star on GitHub!
+## ⭐️ Acknowledgements
+
+- [KLING](https://www.kling.ai/) for providing virtual try-on API.
+- [Cloudinary](https://cloudinary.com/) for image storage and delivery.
+- [OpenWeatherMap](https://openweathermap.org/) for real-time weather data.
+- [ipapi](https://ipapi.co/) for location detection.
+
+---

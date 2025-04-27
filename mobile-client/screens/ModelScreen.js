@@ -1,13 +1,76 @@
 // screens/ModelScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native';
+import { SafeAreaView, View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Modal, Pressable, Button } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { fetchModelPhotos, deleteModelPhoto } from '../services/api';
+import { Ionicons } from '@expo/vector-icons';
+import { Alert } from 'react-native';
+
+
 
 export default function ModelScreen({ navigation }) {
   const [models, setModels] = useState([]);
   const [previewUri, setPreviewUri] = useState(null);
-  const isFocused = useIsFocused(); // 👈 确保返回后刷新
+  const isFocused = useIsFocused(); // to check if the screen is focused
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [selectedModels, setSelectedModels] = useState([]);
+  console.log("✅ ModelScreen Loaded, Navigation:", navigation);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={toggleSelectMode}
+          style={{ marginRight: 16 }}
+        >
+          <Ionicons name="ellipsis-vertical" size={24} color="black" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, isSelecting]);
+
+  const toggleSelectMode = () => {
+    setIsSelecting(!isSelecting);
+    if (isSelecting) {
+      setSelectedModels([]); 
+    }
+  };
+
+  const toggleItemSelection = (modelID) => {
+    if (selectedModels.includes(modelID)) {
+      setSelectedModels(selectedModels.filter(id => id !== modelID));
+    } else {
+      setSelectedModels([...selectedModels, modelID]);
+    }
+  };
+  
+  const handleDeleteModel = () => {
+    if (selectedModels.length === 0) return;
+  
+    Alert.alert('Delete', `Are you sure you want to delete ${selectedModels.length} photos?`, [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            // delete selected models
+            await Promise.all(
+              selectedModels.map(id => deleteModelPhoto(id))
+            );
+  
+            const newModels = models.filter(model => !selectedModels.includes(model._id));
+            setModels(newModels);
+            setSelectedModels([]);
+            setIsSelecting(false);
+  
+          } catch (error) {
+            Alert.alert("Delete failure", "Please check network or server!");
+          }
+        },
+      },
+    ]);
+  };
 
   const loadModels = async () => {
     try {
@@ -22,51 +85,52 @@ export default function ModelScreen({ navigation }) {
     if (isFocused) loadModels();
   }, [isFocused]);
 
-  const handleDelete = (id) => {
-    Alert.alert('Delete', 'Are you sure you want to delete this photo?', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: async () => {
-          await deleteModelPhoto(id);
-          loadModels();
-        },
-      },
-    ]);
-  };
 
   const renderItem = ({ item }) => {
     let imageSrc = { uri: 'https://via.placeholder.com/100' };
   
     if (item.imageUrl) {
-      imageSrc = { uri: item.imageUrl }; // 优先 Cloudinary URL
+      imageSrc = { uri: item.imageUrl };
     } else if (item.imageBase64) {
-      imageSrc = { uri: `data:image/jpeg;base64,${item.imageBase64}` }; // 回退 base64
+      imageSrc = { uri: `data:image/jpeg;base64,${item.imageBase64}` };
     }
-    print("📸 模特照片：", item.imageUrl); // Debugging log
+  
+    const isSelected = selectedModels.includes(item._id);
   
     return (
       <TouchableOpacity
-        onPress={() => setPreviewUri(imageSrc.uri)}
-        onLongPress={() => handleDelete(item._id)}
+        onPress={() => {
+          if (isSelecting) {
+            toggleItemSelection(item._id);
+          } else {
+            setPreviewUri(imageSrc.uri);
+          }
+        }}
         style={styles.modelCard}
       >
-        <Image source={imageSrc} style={styles.thumbnail} />
+        <View style={{ position: 'relative' }}>
+          <Image source={imageSrc} style={styles.thumbnail} />
+          {isSelecting && (
+            <View style={styles.checkBox}>
+              {isSelected && <View style={styles.checkedBox} />}
+            </View>
+          )}
+        </View>
         <Text style={styles.modelName}>{item.name || 'Unnamed Model'}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
+    <SafeAreaView style={styles.container}>
     <View style={styles.container}>
-      <Text style={styles.title}>🧍 Model Gallery</Text>
-      <TouchableOpacity
-        style={styles.addButton}
+      <View style={styles.headerRow}>
+      <Button
+        title="➕ Upload A Model"
         onPress={() => navigation.navigate('UploadModel')}
-      >
-        <Text style={styles.addText}>＋</Text>
-      </TouchableOpacity>
+        color="#007AFF"  
+      />
+    </View>
 
       <FlatList
         data={models}
@@ -86,16 +150,30 @@ export default function ModelScreen({ navigation }) {
         </View>
       </Modal>
     </View>
+    <View/>
+    {isSelecting && selectedModels.length > 0 && (
+      <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteModel}>
+        <Text style={styles.deleteButtonText}>Delete Selected</Text>
+      </TouchableOpacity>
+)}
+
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: '#fff' },
+  headerRow: {
+    flexDirection: 'row',            
+    justifyContent: 'space-between',
+    alignItems: 'center',             
+    marginBottom: 0,
+  },
   title: { fontSize: 22, fontWeight: 'bold', marginBottom: 12 },
   addButton: { position: 'absolute', top: 20, right: 20, zIndex: 10 },
   addText: { fontSize: 30, fontWeight: 'bold', color: '#007AFF' },
-  gallery: { paddingTop: 40 },
-  thumbnail: { width: 100, height: 100, borderRadius: 8, margin: 5 },
+  gallery: { paddingTop: 10 },
+  thumbnail: { width: 100, height: 160, borderRadius: 8, margin: 5 },
   modalContainer: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.95)',
@@ -109,7 +187,7 @@ const styles = StyleSheet.create({
   modelCard: {
     alignItems: 'center',
     margin: 5,
-    width: 100,
+    width: 130,
   },
   
   modelName: {
@@ -118,4 +196,25 @@ const styles = StyleSheet.create({
     color: '#333',
     textAlign: 'center',
   },
+  checkBox: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    width: 20,
+    height: 20,
+    borderWidth: 2,
+    borderColor: '#007AFF',
+    borderRadius: 6,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  checkedBox: {
+    width: 10,
+    height: 10,
+    backgroundColor: '#007AFF',
+    borderRadius: 3,
+  },
+  deleteButton: { backgroundColor: 'red', padding: 14, alignItems: 'center', borderRadius: 10, margin: 20 },
+  deleteButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 }
 });

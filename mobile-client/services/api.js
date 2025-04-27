@@ -1,19 +1,19 @@
 import axios from 'axios';
 import { BASE_URL, CLOUDINARY_UPLOAD_URL, CLOUDINARY_UPLOAD_PRESET } from '@env';
 
-// 上传衣物条目（会发送 imageBase64）
+// uploadItem to the server
 export const uploadItem = async (itemData) => {
   const response = await axios.post(`${BASE_URL}/api/items`, itemData);
   return response.data;
 };
 
-// 获取所有衣物条目
+// fetch items from the server
 export const fetchItems = async () => {
   const response = await axios.get(`${BASE_URL}/api/items`);
   return response.data.items;
 };
 
-// 删除衣物条目
+// delete item from the server
 export const deleteItem = async (id) => {
   const response = await axios.delete(`${BASE_URL}/api/items/${id}`);
   if (!response.status === 200) {
@@ -21,9 +21,13 @@ export const deleteItem = async (id) => {
   }
 };
 
-// 上传图片到 Cloudinary，返回上传后的 URL
+export const updateItemType = async (id, newType) => {
+  const response = await axios.put(`${BASE_URL}/api/items/${id}`, { type: newType });
+  return response.data;
+};
+
+// upload image to Cloudinary
 export const uploadToCloudinary = async (base64) => {
-  console.log("📤 正在上传到 Cloudinary...");
   const formData = new FormData();
   formData.append('file', `data:image/png;base64,${base64}`);
   formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
@@ -34,7 +38,6 @@ export const uploadToCloudinary = async (base64) => {
   });
 
   const result = await response.json();
-  console.log("📦 Cloudinary 响应：", result);
   if (response.ok && result.secure_url) {
     return result.secure_url;
   } else {
@@ -42,7 +45,7 @@ export const uploadToCloudinary = async (base64) => {
   }
 };
 
-// 上传人体模特照片
+// upload model photo to the server
 export const uploadModelPhoto = async (data) => {
   const response = await axios.post(`${BASE_URL}/api/models`, data);
   return response.data;
@@ -50,12 +53,12 @@ export const uploadModelPhoto = async (data) => {
 
 export const fetchModelPhotos = async () => {
   const response = await axios.get(`${BASE_URL}/api/models`);
-  return response.data.models; // ✅ 这里必须是 .models
+  return response.data.models; 
 };
 
-// 删除模特照片
+// delete model photo from the server
 export const deleteModelPhoto = async (id) => {
-  await axios.delete(`${BASE_URL}/api/models/${id}`);
+  await axios.delete(`${BASE_URL}/api/model/${id}`);
 };
 
 export const fetchItemsWithBase64 = async () => {

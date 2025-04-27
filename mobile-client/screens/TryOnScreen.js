@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Picker, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
-import { fetchItems, fetchModelPhotos } from '../services/api';
+import { SafeAreaView, View, Text, StyleSheet, Image, Picker, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { fetchItemsWithBase64, fetchModelPhotosWithBase64 } from '../services/api';
 import { Alert } from 'react-native';
-
+import { BASE_URL } from '@env'; 
 
 export default function TryOnScreen() {
   const [models, setModels] = useState([]);
@@ -15,11 +14,18 @@ export default function TryOnScreen() {
 
   useEffect(() => {
     const loadData = async () => {
-      const modelData = await fetchModelPhotosWithBase64();
-      const itemData = await fetchItemsWithBase64();
-      setModels(modelData);
-      setClothes(itemData);
-      setLoading(false);
+      try {
+        const modelData = await fetchModelPhotosWithBase64();
+        const itemData = await fetchItemsWithBase64();
+        setModels(modelData);
+        setClothes(itemData);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error loading data:", error);
+        Alert.alert("Please try again later.");
+      } finally {
+        setLoading(false);  
+      }
     };
     loadData();
   }, []);
@@ -34,30 +40,29 @@ export default function TryOnScreen() {
     setLoading(true);
   
     try {
-      // Step 1: 启动 Try-On 请求
-      const response = await fetch(`http://192.168.40.9:9000/api/tryon`, {
+      // Step 1: initiate try-on request
+      const response = await fetch(`${BASE_URL}/api/tryon`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          modelBase64: selectedModel.imageBase64,      // ⬅️ 从模型中取出 base64
-          clothingBase64: selectedClothing.imageBase64 // ⬅️ 从衣物中取出 base64
+          modelBase64: selectedModel.imageBase64,      //get model base64
+          clothingBase64: selectedClothing.imageBase64 //get clothing base64
         }),
       });
   
       const result = await response.json();
-      console.log("🎯 服务器响应：", result);
-      const taskId = result.id; // 从后端响应中获取任务 ID
+      const taskId = result.id;
       if (!taskId) {
         throw new Error("No task ID returned");
       }
   
-      // Step 2: 轮询状态
+      // Step 2: start polling for status
       let attempts = 0;
       const maxAttempts = 30;
   
       const interval = setInterval(async () => {
         try {
-          const statusRes = await fetch(`http://192.168.40.9:9000/api/tryon/status/${taskId}`);
+          const statusRes = await fetch(`${BASE_URL}/api/tryon/status/${taskId}`);
           const statusJson = await statusRes.json();
   
           if (statusJson.status === 'succeeded') {
@@ -76,7 +81,7 @@ export default function TryOnScreen() {
           setLoading(false);
           console.error("Status check failed:", err);
         }
-      }, 2000); // 每 2 秒轮询
+      }, 2000); // poll every 2 seconds
   
     } catch (err) {
       console.error("❌ Try-on request failed:", err);
@@ -104,18 +109,9 @@ export default function TryOnScreen() {
     </View>
   );
 
-  if (loading) {
-    return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
   return (
+    <SafeAreaView style={styles.container}>
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>🧍 Try On Clothes</Text>
-
       <Text style={styles.subtitle}>👤 Select a Model:</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollRow}>
         {models.map((model, idx) => (
@@ -145,14 +141,15 @@ export default function TryOnScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      
+
+      <Text style={styles.subtitle}>🎯 Try-On Preview:</Text>
       <TouchableOpacity style={styles.generateButton} onPress={handleGenerate}>
         <Text style={styles.generateButtonText}>✨ Generate Try-On</Text>
       </TouchableOpacity>
 
-      <Text style={styles.subtitle}>🎯 Try-On Preview:</Text>
-      {loading && <ActivityIndicator size="large" color="#000" style={{ marginTop: 20 }} />}
-      {/* tryon展示 */}
+      
+      {loading && <ActivityIndicator size="large" color="#007AFF" style={{ marginTop: 20 }} />}
+      {/* tryon */}
       {generatedImage && (
         <View style={styles.previewBox}>
           <Image source={{ uri: generatedImage }} style={styles.resultImage} />
@@ -160,6 +157,7 @@ export default function TryOnScreen() {
       )}
       
     </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -167,7 +165,7 @@ const styles = StyleSheet.create({
   container: { padding: 16, backgroundColor: '#fff', flex: 1 },
   centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   title: { fontSize: 22, fontWeight: 'bold', marginBottom: 20 },
-  subtitle: { fontSize: 16, fontWeight: '600', marginTop: 20, marginBottom: 10 },
+  subtitle: { fontSize: 16, fontWeight: '600', marginTop: 0, marginBottom: 10 },
   previewBox: {
     width: 300,
     height: 400,
@@ -177,9 +175,15 @@ const styles = StyleSheet.create({
   scrollRow: { flexDirection: 'row', marginBottom: 20 },
   thumbnail: { width: 80, height: 100, borderRadius: 8, marginRight: 10 },
   selected: { borderWidth: 2, borderColor: '#007AFF' },
-  previewBox: { position: 'relative', width: '100%', height: 400, marginTop: 20, alignItems: 'center' },
-//   modelImage: { width: 250, height: 400, resizeMode: 'contain', position: 'absolute' },
-//   clothingImage: { width: 250, height: 400, resizeMode: 'contain', position: 'absolute', opacity: 0.9 },
+  resultImage: {
+    width: 300,
+    height: 400,
+    resizeMode: 'contain',
+    borderRadius: 12,
+    marginTop: 20,
+  },
+  previewBox: { position: 'relative', width: '100%', height: 400, marginTop: 0, alignItems: 'center' },
+
   modelImage: {
     position: 'absolute',
     width: '100%',
@@ -199,7 +203,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 10,
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 0,
   },
   generateButtonText: {
     color: '#fff',

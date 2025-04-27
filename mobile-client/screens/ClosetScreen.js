@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { fetchItems } from '../services/api';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
 
-const categories = ['All', 'top', 'pants', 'pajama', 't-shirt', 'jacket', 'dress', 'others'];
+
+
+const categories = ['tryon', 'All', 'top', 'pants', 'pajama', 't-shirt', 'jacket', 'dress', 'others', 'underwear', 'shoes', 'socks'];
 
 
 const categoryIcons = {
+  All: require('../assets/all.png'),
   top: require('../assets/top_1.png'),
   pants: require('../assets/pants.png'),
   pajama: require('../assets/pajama.avif'),
@@ -15,8 +18,12 @@ const categoryIcons = {
   jacket: require('../assets/jacket.png'),
   dress: require('../assets/dress.png'),
   others: require('../assets/others.png'),
-  All: require('../assets/all.png'),
+  tryon: require('../assets/tryon.png'),
+  underwear: require('../assets/underwear.png'),
+  shoes: require('../assets/shoes.png'),
+  socks: require('../assets/socks.png'),
 };
+
 const MyClosetScreen = () => {
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState('All');
@@ -57,11 +64,18 @@ const MyClosetScreen = () => {
       );
     };
 
-  return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>👚 My Closet</Text>
-      <View style={styles.grid}>
-        {categories.map((category) => (
+    return (
+      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container}>
+        <View style={styles.headerRow}>
+          <Button
+            title="➕ Upload New Item"
+            onPress={() => navigation.navigate('Upload')}
+            color="#007AFF"  
+          />
+          </View>
+          <View style={styles.grid}>
+            {categories.map((category) => (
           <TouchableOpacity
             key={category}
             style={styles.folder}
@@ -73,14 +87,22 @@ const MyClosetScreen = () => {
             </Text>
           </TouchableOpacity>
         ))}
-      </View>
-    </ScrollView>
-  );
-};
+        </View>
+      </ScrollView>
+      </SafeAreaView>
+    );
+  }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingTop: 40, backgroundColor: '#fff', paddingHorizontal: 16 },
-  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 10 },
+  container: { flex: 1, paddingTop: 20, backgroundColor: '#fff', paddingHorizontal: 10 },
+  headerRow: {
+    flexDirection: 'row',            
+    justifyContent: 'space-between', 
+    alignItems: 'right',             
+    marginBottom: 10,
+  },
+  
+  title: { fontSize: 28, fontWeight: 'bold', marginBottom: 10 },
   filterRow: { flexDirection: 'row', flexWrap: 'wrap', marginBottom: 12 },
   filterText: {
     marginRight: 12,
@@ -114,7 +136,7 @@ const styles = StyleSheet.create({
   },
 
   folder: {
-    width: '45%',
+    width: '30%',
     aspectRatio: 1,
     backgroundColor: '#f0f0f0',
     borderRadius: 12,
@@ -124,11 +146,11 @@ const styles = StyleSheet.create({
     marginHorizontal: '1.66%',
   },
   folderIcon: {
-    width: 120,
-    height: 120,
+    width: 80,
+    height: 80,
     resizeMode: 'contain',
   },
-    folderName: { marginTop: 10, fontSize: 16, fontWeight: '500' },
+    folderName: { marginTop: 10, fontSize: 14, fontWeight: '500' },
 });
 
 export default MyClosetScreen;
