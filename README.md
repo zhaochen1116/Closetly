@@ -173,7 +173,7 @@ npm start
 
 **Closetly Team**  
 📧 Email: zhaochen1116@Gmail.com  
-🌐 GitHub: [ClosetlyAI](https://github.com/yourproject)
+🌐 GitHub: [ClosetlyAI](https://github.com/zhaochen1116/ClosetlyAI)
 
 ---
 
