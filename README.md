@@ -57,10 +57,20 @@ It integrates real-time weather-based recommendations, smart image handling, and
 
 ---
 
-## 🖼️ Demo Screenshots_2
+## 🖼️ Demo Screenshots
+
 | Splash Screen | Home Weather Recommendation | Closet View | Model Gallery | AI Try-On |
 |:---:|:---:|:---:|:---:|:---:|
-|![alt text](<mobile-client/assets/20250426223632.png) |![alt text](<mobile-client/assets/20250426222739.png) |![alt text](<mobile-client/assets/20250426222839.png) |![alt text](<mobile-client/assets/20250426222848.png) |![alt text](<mobile-client/assets/20250426222906.png) |![alt text](<mobile-client/assets20250426223139.png) |![alt text](<mobile-client/assets/20250426223149.png) |![alt text](<mobile-client/assets/20250426223203.png) |![alt text](<mobile-client/assets/20250426223512.png) |![alt text](<mobile-client/assets/20250426223526.png) |![alt text](<mobile-client/assets/20250426223542.png) |![alt text](<mobile-client/assets/20250426223607.png) |![alt text](<mobile-client/assets/20250426223623.png)|
+| ![Splash](<mobile-client/assets/20250426223632.png>) | ![Home](<mobile-client/assets/20250426222739.png>) | ![Closet](<mobile-client/assets/20250426222839.png>) | ![Model](<mobile-client/assets/20250426222848.png>) | ![Try-On](<mobile-client/assets/20250426222906.png>) |
+
+| Upload Model | Try-On Loading | Closet Category | Model Upload | Try-On Result |
+|:---:|:---:|:---:|:---:|:---:|
+| ![Upload](<mobile-client/assets/20250426223139.png>) | ![Loading](<mobile-client/assets/20250426223149.png>) | ![Category](<mobile-client/assets/20250426223203.png>) | ![Model Upload](<mobile-client/assets/20250426223512.png>) | ![Result](<mobile-client/assets/20250426223526.png>) |
+
+| Final Try-On |
+|:---:|
+| ![Final](<mobile-client/assets/20250426223542.png>) |
+
 
 ---
 
