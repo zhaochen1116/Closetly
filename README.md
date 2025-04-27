@@ -61,7 +61,7 @@ It integrates real-time weather-based recommendations, smart image handling, and
 
 | AI Try-On-1 | AI Try-On-2 | AI Try-On-3 | Try-on history | Try-on history |
 |:---:|:---:|:---:|:---:|:---:|
-| ![Splash](<mobile-client/assets/20250426223542.png>) | ![Home](<mobile-client/assets/20250426223607.png>) | ![Closet](<mobile-client/assets/20250426223526.png>) | ![Model](<mobile-client/assets/20250426223526.png>) | ![Try-On](<mobile-client/assets/20250426223526.png>) |
+| ![Splash](<mobile-client/assets/20250426223542.png>) | ![Home](<mobile-client/assets/20250426223607.png>) | ![Closet](<mobile-client/assets/20250426223526.png>) | ![Model](<mobile-client/assets/20250426223203.png>) | ![Try-On](<mobile-client/assets/20250426223526.png>) |
 
 
 
